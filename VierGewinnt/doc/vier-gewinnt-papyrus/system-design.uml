@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0f5u4EmJEeirP8wDwhkU5A" name="system-design">
+  <packageImport xmi:type="uml:PackageImport" xmi:id="_0zZSoEmJEeirP8wDwhkU5A">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_2_0G4EmJEeirP8wDwhkU5A" name="Farbe">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_8EQRIEmJEeirP8wDwhkU5A" name="ROT"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_9MzNkEmJEeirP8wDwhkU5A" name="GELB"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_NeZz0EmKEeirP8wDwhkU5A" name="Spielfeld">
+    <ownedComment xmi:type="uml:Comment" xmi:id="_-zYCcEmMEeirP8wDwhkU5A" annotatedElement="_NeZz0EmKEeirP8wDwhkU5A">
+      <body>Singleton</body>
+    </ownedComment>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_UxV18EmKEeirP8wDwhkU5A" name="arraySpielfeld" visibility="private" type="_2_0G4EmJEeirP8wDwhkU5A" isUnique="false" isReadOnly="true">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_IflpEEmNEeirP8wDwhkU5A" annotatedElement="_UxV18EmKEeirP8wDwhkU5A">
+        <body>zweidimensionales Array 6 Zeilen, 7 Spalten</body>
+      </ownedComment>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QsaLcEmLEeirP8wDwhkU5A" value="1"/>
+      <upperValue xmi:type="uml:LiteralInteger" xmi:id="_9_bs4EpkEeig6ba-SYydZw" value="42"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_8SHcEEmLEeirP8wDwhkU5A" name="instanceSpielfeld" visibility="private" isStatic="true" type="_NeZz0EmKEeirP8wDwhkU5A"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_KUIlUEmMEeirP8wDwhkU5A" name="getInstance" isStatic="true" isQuery="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_RijaMEmUEeipyYQf-c1O2A" type="_NeZz0EmKEeirP8wDwhkU5A" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Tql-YEmMEeirP8wDwhkU5A" name="Spielfeld" visibility="private"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_a-mXgEmMEeirP8wDwhkU5A" name="setzeStein">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_y2TzgEmMEeirP8wDwhkU5A" name="spalte" effect="read">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_3ucnIEmMEeirP8wDwhkU5A" name="farbe" type="_2_0G4EmJEeirP8wDwhkU5A"/>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_Pn11YEpiEeig6ba-SYydZw" name="sindVierInEinerReihe" isQuery="true">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_cdEbYEpiEeig6ba-SYydZw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_ttD1IEplEeig6ba-SYydZw" name="getSpielfeldAnsicht" isQuery="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_TvEZQEmNEeirP8wDwhkU5A" name="Spieler">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_YU24oEmNEeirP8wDwhkU5A" name="name" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_d_pRMEmNEeirP8wDwhkU5A" name="farbe" visibility="private" type="_2_0G4EmJEeirP8wDwhkU5A"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_vvyqUEmTEeipyYQf-c1O2A" name="Spieler">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_7MohEEmTEeipyYQf-c1O2A" name="farbe" type="_2_0G4EmJEeirP8wDwhkU5A"/>
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_2WJ6UEmTEeipyYQf-c1O2A" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_2Z2_cEpgEeig6ba-SYydZw" name="setzeStein">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_8xf28EpgEeig6ba-SYydZw" name="spalte">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_EDrEEEphEeig6ba-SYydZw" name="SpielEngine">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Tw7AEEphEeig6ba-SYydZw" name="alleSpieler" visibility="private" type="_TvEZQEmNEeirP8wDwhkU5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_grW2MEphEeig6ba-SYydZw" value="2"/>
+      <upperValue xmi:type="uml:LiteralInteger" xmi:id="_6fO8kEpkEeig6ba-SYydZw" value="2"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_vNrv0EpkEeig6ba-SYydZw" name="aktuellerSpieler" visibility="private" type="_TvEZQEmNEeirP8wDwhkU5A">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_0aWB8EpkEeig6ba-SYydZw" value="1"/>
+      <upperValue xmi:type="uml:LiteralInteger" xmi:id="_1ppGoEpkEeig6ba-SYydZw" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_YAkWsEppEeig6ba-SYydZw" name="status" visibility="private" type="_aYnMIEppEeig6ba-SYydZw"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_n72y4EpiEeig6ba-SYydZw" name="start"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_C6-EsEpjEeig6ba-SYydZw" name="wechselSpieler" visibility="private"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_0dQZwEppEeig6ba-SYydZw" name="liesSpalteUndSetzeStein" visibility="private"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_42JFkEppEeig6ba-SYydZw" name="spielerHatGewonnen" visibility="private">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_8PWdEEppEeig6ba-SYydZw" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_N53-EEpqEeig6ba-SYydZw" name="zeigeSpielfeld" visibility="private"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_YILlIEpqEeig6ba-SYydZw" name="ende" visibility="private"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_aYnMIEppEeig6ba-SYydZw" name="EngineStatus">
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_dQf_QEppEeig6ba-SYydZw" name="INIT"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_e1zwMEppEeig6ba-SYydZw" name="VERARBEITE_EINGABE"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_je6CQEppEeig6ba-SYydZw" name="ENDE"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_kQezsEpqEeig6ba-SYydZw" name="VierGewinntMain">
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_oh7awEpqEeig6ba-SYydZw" name="main">
+      <ownedParameter xmi:type="uml:Parameter" xmi:id="_vV1XgEpqEeig6ba-SYydZw" name="args">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_vV1XgUpqEeig6ba-SYydZw"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_0TBDMEpqEeig6ba-SYydZw" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_Xb4DUEprEeig6ba-SYydZw" name="zeigt an" client="_EDrEEEphEeig6ba-SYydZw" supplier="_NeZz0EmKEeirP8wDwhkU5A"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_cSEWMEprEeig6ba-SYydZw" name="erstellt und leitet Eingaben weiter" client="_EDrEEEphEeig6ba-SYydZw" supplier="_TvEZQEmNEeirP8wDwhkU5A"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_v4h_cEprEeig6ba-SYydZw" name="modifiziert" client="_TvEZQEmNEeirP8wDwhkU5A" supplier="_NeZz0EmKEeirP8wDwhkU5A"/>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_5ph_cEprEeig6ba-SYydZw" name="erstellt und startet" client="_0f5u4EmJEeirP8wDwhkU5A" supplier="_EDrEEEphEeig6ba-SYydZw"/>
+</uml:Model>
