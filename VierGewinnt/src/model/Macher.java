@@ -8,6 +8,7 @@ public class Macher {
 	private int i;
 
 	// Wie gebe ich einen Werte aus einer enum vor? Zum Testen
+	// Z. B. Farbe.ROT (du greifst darauf zu, wie auf "public" Variablen)
 	private Farbe testFarbe = "ROT";
 	Scanner SpalteUser = new Scanner(System.in);
 
@@ -20,20 +21,24 @@ public class Macher {
 
 		{
 
-			// todo Mensch sucht eine Zeile aus
+			// TODO Mensch sucht eine Zeile aus
+			// TODOs immer groß schreiben, damit sie in der "Tasks" View erscheinen
 			
-			// Aufpassen bei Usereingabe, nur INT gestattet
+			// TODO Aufpassen bei Usereingabe, nur INT gestattet
 			i = SpalteUser.nextInt();
 			
 			
-			// todo rausfinden welche unterste Zeile ist
+			// TODO rausfinden welche unterste Zeile ist
+			// Sollte nicht hier passieren, siehe Spielfeld-Klasse
 			
 			
-			// todo Platziere Stein an unterster Stelle -> Unnötig / falsch? Muss doch erst Zeile ermittelt werden, bevor Wert übergeben wird?
+			// TODO Platziere Stein an unterster Stelle -> Unnötig / falsch? Muss doch erst Zeile ermittelt werden, bevor Wert übergeben wird?
+			// Siehe oben
 			Spielfeld.setzeStein(i, testFarbe);
 		
 
-			// todo Prüfe ob Sieger, übergeben der Stelle des letzten Steineinwurfs, angrenzende Felder prüfen
+			// TODO Prüfe ob Sieger, übergeben der Stelle des letzten Steineinwurfs, angrenzende Felder prüfen
+			// Sollte auch nicht hier passieren, sondern auch in der Spielfeld-Klasse
 			
 			//Vertikal
 			If (Spielfeld.getArraySpielFeld()arraySpielFeld[i][-3] = testFarbe && arraySpielFeld[i][-2] = testFarbe && arraySpielFeld[i][-1] = testFarbe)

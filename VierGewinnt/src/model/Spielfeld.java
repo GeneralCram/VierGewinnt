@@ -20,6 +20,10 @@ public class Spielfeld {
 	// Dieser wiederrum muss doch erst ermittelt werden, dies wiederrum passiert
 	// doch in der "controller Klasse"/Macher (die aber nicht der MVC Controller ist
 	// und nicht die Main ist)
+	// 
+	// Dies ist die Schnittstelle für den Spieler um mit dem Spielfeld zu interagieren.
+	// Die Information in welcher Zeile der Stein zu liegen kommt, ist nur in dieser Klasse
+	// vorhanden und somit nach außen gekapselt. Sie ist auch für den Spieler nicht relevant - Prinzip "Information Hiding".
 
 	public void setzeStein(int spalte, Farbe farbe) {
 
@@ -33,6 +37,7 @@ public class Spielfeld {
 		return instanceSpielfeld;
 	}
 
+	// Das Array soll nicht nach außen gegeben werden - Prinzip "Information Hiding"
 	public Farbe[][] getArraySpielFeld() {
 		return arraySpielFeld;
 	}
