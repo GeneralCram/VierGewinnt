@@ -35,6 +35,7 @@
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_ttD1IEplEeig6ba-SYydZw" name="getSpielfeldAnsicht" isQuery="true"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_zjCfgEqxEeiew6SN-2baPA" name="leereFeld"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_TvEZQEmNEeirP8wDwhkU5A" name="Spieler">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_YU24oEmNEeirP8wDwhkU5A" name="name" visibility="private">
