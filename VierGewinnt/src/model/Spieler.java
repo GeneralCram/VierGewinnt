@@ -11,12 +11,18 @@ public class Spieler {
 
 	private String name;
 	private Farbe farbe;
-	private Spielfeld spielfeld;
 
-	public Spieler(Spielfeld spielfeld, Farbe farbe, String name) {
+	public Spieler(Farbe farbe, String name) {
 
 		this.name = name;
 		this.farbe = farbe;
-		this.spielfeld = spielfeld;
+
 	}
+
+	public void setzeStein(int spalte) {
+
+		Spielfeld.getInstance().setzeStein(spalte, farbe);
+
+	}
+
 }

@@ -10,35 +10,35 @@ package model;
 public class Spielfeld {
 
 	private final Farbe arraySpielFeld[][] = new Farbe[6][7];
-	private Spielfeld instanceSpielfeld;
+	private static Spielfeld instanceSpielfeld;
 
 	public Spielfeld() {
 	}
 
-	// Dies ist der Setter? Hat hier doch gar nichts zu suchen, es muss doch auch
-	// angegeben sein welche Zeile damit ein Wert gesetzt werden kann.
-	// Dieser wiederrum muss doch erst ermittelt werden, dies wiederrum passiert
-	// doch in der "controller Klasse"/Macher (die aber nicht der MVC Controller ist
-	// und nicht die Main ist)
-	// 
-	// Dies ist die Schnittstelle f¸r den Spieler um mit dem Spielfeld zu interagieren.
-	// Die Information in welcher Zeile der Stein zu liegen kommt, ist nur in dieser Klasse
-	// vorhanden und somit nach auﬂen gekapselt. Sie ist auch f¸r den Spieler nicht relevant - Prinzip "Information Hiding".
-
 	public void setzeStein(int spalte, Farbe farbe) {
+
+		for (int i = 5; i >= 0; i--) {
+			if (arraySpielFeld[i][spalte] == null) {
+				arraySpielFeld[i][spalte] = farbe;
+				break;
+			}
+
+		}
 
 	}
 
-	public Spielfeld getInstance() {
+	public static Spielfeld getInstance() {
 
 		if (instanceSpielfeld == null) {
 			instanceSpielfeld = new Spielfeld();
 		}
 		return instanceSpielfeld;
+
 	}
 
-	// Das Array soll nicht nach auﬂen gegeben werden - Prinzip "Information Hiding"
-	public Farbe[][] getArraySpielFeld() {
-		return arraySpielFeld;
+	public boolean VierEineReihe() {
+
+		return false;
 	}
+
 }
