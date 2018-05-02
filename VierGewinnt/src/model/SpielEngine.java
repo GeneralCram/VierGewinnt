@@ -17,6 +17,15 @@ public class SpielEngine {
 	private int randomInt;
 	private Random randomGenerator;
 
+	// Default Constructor
+	public SpielEngine() {
+		SpielEngine testStart = new SpielEngine();
+	}
+
+	// 3 Phasen die durchlaufen werden: 1 mal die INIT Phase, zum Übergeben der
+	// Startparameter,
+	// die VERARBEITE_EINGABE Phase beeinhaltet die Spielmechanik. Schleife bis Ende
+	// Ende gibt die Möglichkeit des Neustarts
 	public void start() {
 
 		while (true) {
