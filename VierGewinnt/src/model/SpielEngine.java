@@ -19,7 +19,6 @@ public class SpielEngine {
 
 	// Default Constructor
 	public SpielEngine() {
-		SpielEngine testStart = new SpielEngine();
 	}
 
 	// 3 Phasen die durchlaufen werden: 1 mal die INIT Phase, zum Übergeben der

@@ -7,8 +7,5 @@ public class VierGewinntMain {
 
 	public static void main(String[] args) {
 
-		// Es wird hier der Konstruktor von SpielEngine ausgerufen - dieser erstellt ein
-		// neues Objekt der Methode "Start"
-		new SpielEngine();
 	}
 }
