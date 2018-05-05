@@ -26,6 +26,15 @@ public class SpielEngine {
 	// Startparameter,
 	// die VERARBEITE_EINGABE Phase beeinhaltet die Spielmechanik. Schleife bis Ende
 	// Ende gibt die Möglichkeit des Neustarts
+
+	public void SpielfeldDarstellen(Farbe[][] arrayDesSpielFeld) {
+		for (int i = 0; i < arrayDesSpielFeld.length; i++) {
+			for (int j = 0; j < arrayDesSpielFeld[i].length; j++)
+				System.out.print("|" + arrayDesSpielFeld[i][j]);
+			System.out.println("|");
+		}
+	}
+
 	public void start() {
 
 		while (true) {
@@ -49,14 +58,15 @@ public class SpielEngine {
 				System.out.println("Bitte geben Sie eine Spalte für den Einwurf ein");
 				int spalte = scanner.nextInt();
 				aktuellerSpieler.setzeStein(spalte);
-				// Es scheint das Falsche Spielfeld referenziert zu sein? bei
-				// .SpielfeldDarstellen! !!! Was
-				// viel wichtiger ist, bei
-				// der Darstellung kommt es doch sicherlich zu einer NullPointerException! Wie
-				// soll das Programm leere Felder darstellen? Eieiei Vielleicht dafür einmal
-				// alle über eine Schleife alle leeren (Null) Felder mit z.B. "Leer" füllen und
-				// danach alle mit "Leer" wieder zu Null machen? Das is doch nix
-				spielfeldDisplay.SpielfeldDarstellen();
+				// Darstellung des Spielfelds über die Konsole.
+				// Hier wird die Methode SpielfeldDarstellen aus der selben Klasse aufgerufen.
+				// Als Argument wird die Methode "getArraySpielFeld" aus der Klasse "Spielfeld"
+				// übergeben.
+				// Dieser gibt als Return den von der Methode "SpielfeldDarstellen" erwarteten 2
+				// dimensionalen Array aus. Warum aber verlangt akzeptiert er das Argument nicht
+				// und will dass es in static übertragen wird? Gibt es das Objekt nicht? Fehtl
+				// die Referenz?
+				SpielfeldDarstellen(Spielfeld.getArraySpielFeld());
 			}
 
 			if (status == EngineStatus.ENDE) {

@@ -30,6 +30,10 @@ public class Spielfeld {
 
 	}
 
+	public Farbe[][] getArraySpielFeld() {
+		return arraySpielFeld;
+	}
+
 	public static Spielfeld getInstance() {
 
 		if (instanceSpielfeld == null) {
@@ -37,31 +41,6 @@ public class Spielfeld {
 		}
 		return instanceSpielfeld;
 
-	}
-
-	// Wie lasse ich diese Methode das Spielfeld darstellen? Wenn ich Sie in
-	// Spielengine aurufe, muss ich ja ein Array zum darstellen übergeben. Das Array
-	// ist aber als Private in der Klasse Spielfeld deklariert. Über
-	// InstanceSpielfeld vlt, oder is das nur zum Erstellen des Objekts?
-	// Ahh, scheinbar war ein Schreibfehler drin. Jetzt erkennt er ArraySpielFeld
-	//
-	// Immer noch kein Verständnis. Ich brauche ein Objekt, an dem ich diese Methode
-	// anwenden kann. Das Objekt wird innerhalb der Methode genannt
-	// ArraySpielFeld ist ja auch schon erschaffen. Aber wenn ich diese Methode
-	// innerhalb von SpielEngine nutzen will, muss ich in SpielEngine erst noch ein
-	// Objekt davon erschaffen?!
-	//
-	// Mhhh dritter Ansatz. Also instanceSpielfeld ist ein Objekt der Klasse
-	// Spielfeld. ArraySpielFeld ist ein Objekt innerhalb des Objekts der Klasse
-	// SpielFeld.
-	//
-
-	public void SpielfeldDarstellen() {
-		for (int i = 0; i < arraySpielFeld.length; i++) {
-			for (int j = 0; j < arraySpielFeld[i].length; j++)
-				System.out.print("|" + arraySpielFeld[i][j]);
-			System.out.println("|");
-		}
 	}
 
 	public boolean VierEineReihe() {
