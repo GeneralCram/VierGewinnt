@@ -66,7 +66,7 @@ public class SpielEngine {
 				// dimensionalen Array aus. Warum aber verlangt akzeptiert er das Argument nicht
 				// und will dass es in static übertragen wird? Gibt es das Objekt nicht? Fehtl
 				// die Referenz?
-				SpielfeldDarstellen(Spielfeld.getArraySpielFeld());
+				SpielfeldDarstellen(Spielfeld.getInstance().getArraySpielFeld());
 			}
 
 			if (status == EngineStatus.ENDE) {

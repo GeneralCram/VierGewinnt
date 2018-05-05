@@ -13,7 +13,7 @@ public class Spielfeld {
 	private final Farbe arraySpielFeld[][] = new Farbe[6][7];
 	private static Spielfeld instanceSpielfeld;
 
-	public Spielfeld() {
+	private Spielfeld() {
 	}
 
 	public void setzeStein(int spalte, Farbe farbe) {
