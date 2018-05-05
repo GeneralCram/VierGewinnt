@@ -16,6 +16,7 @@ public class SpielEngine {
 	private EngineStatus status = EngineStatus.INIT;
 	private int randomInt;
 	private Random randomGenerator;
+	private Spielfeld spielfeldDisplay;
 
 	// Default Constructor
 	public SpielEngine() {
@@ -31,7 +32,9 @@ public class SpielEngine {
 
 			if (status == EngineStatus.INIT) {
 
+				System.out.println("Spieler 1, bitte geben Sie Ihren Namen ein!");
 				spieler1Name = scanner.next();
+				System.out.println("Spieler 2, bitte geben Sie Ihren Namen ein!");
 				spieler2Name = scanner.next();
 
 				spielerListe.add(new Spieler(Farbe.ROT, spieler1Name));
@@ -43,9 +46,17 @@ public class SpielEngine {
 			}
 
 			if (status == EngineStatus.VERARBEITE_EINGABE) {
+				System.out.println("Bitte geben Sie eine Spalte für den Einwurf ein");
 				int spalte = scanner.nextInt();
 				aktuellerSpieler.setzeStein(spalte);
-
+				// Es scheint das Falsche Spielfeld referenziert zu sein? bei
+				// .SpielfeldDarstellen! !!! Was
+				// viel wichtiger ist, bei
+				// der Darstellung kommt es doch sicherlich zu einer NullPointerException! Wie
+				// soll das Programm leere Felder darstellen? Eieiei Vielleicht dafür einmal
+				// alle über eine Schleife alle leeren (Null) Felder mit z.B. "Leer" füllen und
+				// danach alle mit "Leer" wieder zu Null machen? Das is doch nix
+				spielfeldDisplay.SpielfeldDarstellen();
 			}
 
 			if (status == EngineStatus.ENDE) {
