@@ -29,9 +29,16 @@ public class SpielEngine {
 
 	public void SpielfeldDarstellen(Farbe[][] arrayDesSpielFeld) {
 		for (int i = 0; i < arrayDesSpielFeld.length; i++) {
-			for (int j = 0; j < arrayDesSpielFeld[i].length; j++)
-				System.out.print("|" + arrayDesSpielFeld[i][j]);
-			System.out.println("|");
+			for (int j = 0; j < arrayDesSpielFeld[i].length; j++) {
+				if (arrayDesSpielFeld[i][j] == null) {
+					System.out.print("|");
+				} else {
+					System.out.print("|" + arrayDesSpielFeld[i][j]);
+				}
+				if (j == 6) {
+					System.out.println("|");
+				}
+			}
 		}
 	}
 
