@@ -30,7 +30,7 @@ public class Spielfeld {
 
 	}
 
-	public Farbe[][] getArraySpielFeld() {
+	public Farbe[][] getSpielFeldAnsicht() {
 		return arraySpielFeld;
 	}
 
@@ -41,6 +41,14 @@ public class Spielfeld {
 		}
 		return instanceSpielfeld;
 
+	}
+
+	public void leereFeld() {
+		for (int zeile = 0; zeile < arraySpielFeld.length; zeile++) {
+			for (int spalte = 0; spalte < arraySpielFeld[zeile].length; spalte++) {
+				arraySpielFeld[zeile][spalte] = null;
+			}
+		}
 	}
 
 	public boolean VierEineReihe() {

@@ -27,7 +27,7 @@ public class SpielEngine {
 	// die VERARBEITE_EINGABE Phase beeinhaltet die Spielmechanik. Schleife bis Ende
 	// Ende gibt die Möglichkeit des Neustarts
 
-	public void SpielfeldDarstellen(Farbe[][] arrayDesSpielFeld) {
+	public void zeigeSpielFeld(Farbe[][] arrayDesSpielFeld) {
 		for (int i = 0; i < arrayDesSpielFeld.length; i++) {
 			for (int j = 0; j < arrayDesSpielFeld[i].length; j++) {
 				if (arrayDesSpielFeld[i][j] == null) {
@@ -39,6 +39,15 @@ public class SpielEngine {
 					System.out.println("|");
 				}
 			}
+		}
+	}
+
+	private void wechselSpieler() {
+		if (aktuellerSpieler = spielerListe.get(1)) {
+			aktuellerSpieler = spielerListe.get(0);
+		}
+		if (aktuellerSpieler = spielerListe(0)) {
+			aktuellerSpieler = spielerListe.get(1);
 		}
 	}
 
@@ -73,7 +82,9 @@ public class SpielEngine {
 				// dimensionalen Array aus. Warum aber verlangt akzeptiert er das Argument nicht
 				// und will dass es in static übertragen wird? Gibt es das Objekt nicht? Fehtl
 				// die Referenz?
-				SpielfeldDarstellen(Spielfeld.getInstance().getArraySpielFeld());
+				zeigeSpielFeld(Spielfeld.getInstance().getSpielFeldAnsicht());
+				wechselSpieler();
+
 			}
 
 			if (status == EngineStatus.ENDE) {
