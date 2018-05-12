@@ -16,7 +16,6 @@ public class SpielEngine {
 	private EngineStatus status = EngineStatus.INIT;
 	private int randomInt;
 	private Random randomGenerator;
-	private Spielfeld spielfeldDisplay;
 
 	// Default Constructor
 	public SpielEngine() {
@@ -31,22 +30,42 @@ public class SpielEngine {
 		for (int i = 0; i < arrayDesSpielFeld.length; i++) {
 			for (int j = 0; j < arrayDesSpielFeld[i].length; j++) {
 				if (arrayDesSpielFeld[i][j] == null) {
-					System.out.print("|");
+					System.out.print("  |  ");
 				} else {
 					System.out.print("|" + arrayDesSpielFeld[i][j]);
 				}
 				if (j == 6) {
-					System.out.println("|");
+					System.out.println("  |  ");
 				}
 			}
 		}
 	}
 
-	private void wechselSpieler() {
-		if (aktuellerSpieler = spielerListe.get(1)) {
-			aktuellerSpieler = spielerListe.get(0);
+	public boolean pruefeObVierInZeile(Farbe[][] arraySpielFeld) {
+		for (int zeile = 0; zeile < 6; zeile++) {
+			int summe = 1;
+			for (int spalte = 0; spalte < 6; spalte++) { // nur bis zur 6.Spalte pruefen, da die nachfolgende Spalte
+															// immer mitkontrolliert wird
+				if (arraySpielFeld[zeile][spalte + 1] != null && arraySpielFeld[zeile][spalte] != null
+						&& arraySpielFeld[zeile][spalte] == arraySpielFeld[zeile][spalte + 1]) {
+					if (summe >= 4) {
+						summe = summe + 1;
+						if (summe >= 4) {
+							return true;
+						}
+					} else {
+						summe = 1;
+					}
+				}
+			}
 		}
-		if (aktuellerSpieler = spielerListe(0)) {
+		return false;
+	}
+
+	private void wechselSpieler() {
+		if (aktuellerSpieler == spielerListe.get(1)) {
+			aktuellerSpieler = spielerListe.get(0);
+		} else if (aktuellerSpieler == spielerListe.get(0)) {
 			aktuellerSpieler = spielerListe.get(1);
 		}
 	}
@@ -65,24 +84,35 @@ public class SpielEngine {
 				spielerListe.add(new Spieler(Farbe.ROT, spieler1Name));
 				spielerListe.add(new Spieler(Farbe.GELB, spieler2Name));
 				randomGenerator = new Random();
+				// Startspieler wird zufällig festgemacht
 				int randomInt = randomGenerator.nextInt(1);
 				aktuellerSpieler = spielerListe.get(randomInt);
 				status = EngineStatus.VERARBEITE_EINGABE;
 			}
 
 			if (status == EngineStatus.VERARBEITE_EINGABE) {
-				System.out.println("Bitte geben Sie eine Spalte für den Einwurf ein");
-				int spalte = scanner.nextInt();
-				aktuellerSpieler.setzeStein(spalte);
-				// Darstellung des Spielfelds über die Konsole.
-				// Hier wird die Methode SpielfeldDarstellen aus der selben Klasse aufgerufen.
-				// Als Argument wird die Methode "getArraySpielFeld" aus der Klasse "Spielfeld"
-				// übergeben.
-				// Dieser gibt als Return den von der Methode "SpielfeldDarstellen" erwarteten 2
-				// dimensionalen Array aus. Warum aber verlangt akzeptiert er das Argument nicht
-				// und will dass es in static übertragen wird? Gibt es das Objekt nicht? Fehtl
-				// die Referenz?
+				System.out.println("Bitte geben Sie eine Spalte zwischen 1 und 7 für den Einwurf ein");
+
+				// Wie packt man hier eine Schleife drum, ohne dass er nur die Catch Exception
+				// wiederholt? Bei meinem Versuch hat er die Exception gespammt und wollte
+				// keinen neuen Input
+				try {
+					int spalte = scanner.nextInt() - 1;
+					aktuellerSpieler.setzeStein(spalte);
+				}
+
+				catch (Exception e)
+
+				{
+					System.out.println("Sie Depp haben eine falsche Spaltenzahl eingegeben!");
+
+				}
+
+				if (pruefeObVierInZeile(Spielfeld.getInstance().getSpielFeldAnsicht()) == true) {
+					System.out.println("Gewonnen!");
+				}
 				zeigeSpielFeld(Spielfeld.getInstance().getSpielFeldAnsicht());
+
 				wechselSpieler();
 
 			}
