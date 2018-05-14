@@ -26,21 +26,37 @@ public class SpielEngine {
 	// die VERARBEITE_EINGABE Phase beeinhaltet die Spielmechanik. Schleife bis Ende
 	// Ende gibt die Möglichkeit des Neustarts
 
+	// Das sieht soweit ok aus. Nur drei Dinge:
+	// 1. Wieso nimmst du nicht z. B. "X" und "O" um die verschiedenen Farben zu kennzeichnen? So würde das Feld bei der Ausgabe nicht so zerrissen aussehen
+	// 2. Wieso schreibst du in der mittleren Ausgabe nicht auch " | " anstatt "|"? So würde das Feld ebenfalls nicht so zerrissen aussehen.
+	// 3. Wenn du dann noch die Kommentare im Code umsetzt, dann kommst du mit nur einem if-Block aus (es gibt sogar eine noch elegantere Variante ganz ohne if-Block, aber dazu später mehr).
 	public void zeigeSpielFeld(Farbe[][] arrayDesSpielFeld) {
 		for (int i = 0; i < arrayDesSpielFeld.length; i++) {
 			for (int j = 0; j < arrayDesSpielFeld[i].length; j++) {
 				if (arrayDesSpielFeld[i][j] == null) {
-					System.out.print("  |  ");
+					System.out.print("  |  "); // Dashier einfach vor den Beginn der inneren Schleife setzen, da das für jede Zeile ausgegeben werden muss, egal ob null oder nicht
 				} else {
-					System.out.print("|" + arrayDesSpielFeld[i][j]);
+					System.out.print("|" + arrayDesSpielFeld[i][j]); // Das hier dann vertauschen, also print(arrayDesSpielFeld[i][j] + " | "). Zusätzlich könntest du dann hier mit einem if-Block
+																	 // prüfen, welches Zeichen ausgegeben werden soll: "X", "O" oder " ", je nachdem ob ROT, GELB oder null
 				}
 				if (j == 6) {
-					System.out.println("  |  ");
+					System.out.println("  |  "); // Das hier hinter das Ende der inneren Schleife setzen, da das für jede Zeile am Ende ausgegeben werden muss
 				}
 			}
 		}
 	}
 
+	// Zunächst: Schau nochmal wieder ins Klassendiagramm.
+	// Wie schon bei den beiden Methoden "zeigeSpielfeld" und "getSpielfeldAnsicht" gibt es auch hier wieder zwei Methoden, die zusammenspielen sollen:
+	// 1. In der Klasse "Spielfeld" gibt es die Methode "sindVierInEinerReihe": Hier soll der Algorithmus implementiert werden, der prüft, ob vier Steine der zuletzt gesetzten Farbe
+	//	  in einer Reihe sind (horizontal, vertikal und diagonal). Dazu kann in der Klasse "Spielfeld" ruhig die zuletzt gesetzte Farbe und die letzte verwendete Spalte gespeichert werden,
+	//    sonst wird das zu kompliziert
+	// 2. In der Klasse "SpielEngine" gibt es die Methode "spielerHatGewonnen": Hier soll die Methode "sindVierInEinerReihe" verwendet/aufgerufen werden und wenn true zurückkommt, dann hat
+	//    der aktuelleSpieler gewonnen und wenn false zurückkommt dann eben nicht. Kurz gesagt gibt die Methode "spielerHatGewonnen" einfach den Rückgabewert von "sindVierInEinerReihe" zurück.
+	// 3. Die Methode "spielerHatGewonnen" wird unten dann so verwendet/aufgerufen, wie du es schon mit dieser Methode "pruefeObVierInZeile" gemacht hast, um den Sieg anzuzeigen (im Falle
+	//    des Siegs sollte hier dann natürlich auch der EngineStatus geändert werden)
+	//	
+	//	Nun zum Algorithmus: Den verstehe ich noch nicht so ganz. Ich sehe, dass du prüfen willst, ob vier Steine in einer Zeile nebeneinander liegen, aber (in der Schleife geht es weiter):
 	public boolean pruefeObVierInZeile(Farbe[][] arraySpielFeld) {
 		for (int zeile = 0; zeile < 6; zeile++) {
 			int summe = 1;
@@ -48,12 +64,19 @@ public class SpielEngine {
 															// immer mitkontrolliert wird
 				if (arraySpielFeld[zeile][spalte + 1] != null && arraySpielFeld[zeile][spalte] != null
 						&& arraySpielFeld[zeile][spalte] == arraySpielFeld[zeile][spalte + 1]) {
-					if (summe >= 4) {
-						summe = summe + 1;
-						if (summe >= 4) {
+					// Wie soll diese Bedingung (summe >= 4) an dieser Stelle jemals wahr werden?
+					// summe wird oben auf 1 gesetzt und bei dem Wert bleibt es dann auch.
+					// Ich würde an dieser Stelle unkonditional (also ohne if-Block) summe = summe + 1 oder auch einfach summe++ (ist die kurze Notation dafür) setzen.
+					// So wird jedes Mal der Wert erhöht, wenn ein gleicher Stein als Nachbar gefunden wird.
+					// Sollte kein gleicher Nachbar gefunden werden, dann summe = 1.
+					// Nachdem die innere Schleife für die Spalten durchgelaufen ist, kannst du dann die Bedingung (summe >= 4) verwenden um true zurückzugeben. Also:
+					
+					if (summe >= 4) { // Diese Bedingung entfernen, da sie hier nie wahr werden kann
+						summe = summe + 1; // Dies unkonditional immer an dieser Stelle machen (oder auch einfach summe++)
+						if (summe >= 4) { // Diesen if-Block hinter die innere Schleife setzen
 							return true;
 						}
-					} else {
+					} else { // Diesen Block als else-Zweig für den (arraySpielfeld[zeile][spalte] != null && ...)-Block (also den äußeren if-Block) verwenden
 						summe = 1;
 					}
 				}
@@ -96,6 +119,38 @@ public class SpielEngine {
 				// Wie packt man hier eine Schleife drum, ohne dass er nur die Catch Exception
 				// wiederholt? Bei meinem Versuch hat er die Exception gespammt und wollte
 				// keinen neuen Input
+				//
+				// Die Schleife, die das hier immer wiederholt ist die äußere while(true)-Schleife, solange sich der EngineStatus von VERARBEITE_EINGABE nicht ändert.
+				// Du kannst den try-Block einfach vergrößern und den gesamten Code von "println("Bitte geben Sie eine Spalte... bis wechselSpieler()" in den try-Block packen und den
+				// catch-Block dann ganz ans Ende packen. Strukturell sieht das dann so aus:
+				//
+				// if (status == EngineStatus.VERARBEITE_EINGABE) {
+				//		try {
+				//			hier kommt der gesamte Code...
+				//		} catch (Exception e) {
+				//			hier kommt die Fehlermeldung
+				//		}
+				// }
+				//
+				// Dann würde immer, wenn die Exception geworfen wird, durch die äußere while(true)-Schleife wieder oben angefangen werden und direkt nach der Fehlerausgabe wieder nach
+				// der Spaltenzahl gefragt werden.
+				//
+				// Dazu aber noch folgende Anmerkungen:
+				// 1. Du hast so noch nicht überprüft, ob eine zu kleine oder zu große Spaltenzahl eingegeben wurde. Die Exceptions die von Scanner.nextInt() geworfen werden können
+				// 	  beziehen sich nur darauf, ob überhaupt eine Zahl eingegeben wurde (InputMismatchException, wenn keine Zahl eingegeben wurde) 
+				//    oder ob funktionelle Probleme mit dem Scanner bestehen (NoSuchElementException, IllegalStateException)
+				// 2. Du betreibst hier Control-Flow-By-Exception, d. h. du verwendest eine Exception als erwartetes Ergebnis um den Programmfluss zu steuern.
+				//    Das gilt als schlechter Stil (siehe hier warum: https://softwareengineering.stackexchange.com/a/189225)
+				//	  Im Grunde willst du ja sagen: Wenn die Exception (insbesondere NUR die InputMismatchException) auftritt/geworfen wird, dann frage nochmal neu nach der Spalte. 
+				//    Das kannst du aber auch anders prüfen und vor allen Dingen reicht die Exception allein auch nicht aus, um alle Fehleingaben abzufangen (zu kleine oder große Spaltenzahl)
+				// 3. Ein catch (Exception e)-Block, also ein Block der einfach jeden Typ von Exception abfängt ist ebenfalls schlechter Stil.
+				//    Sorry für das frühe Bashing über Coding-Stil. Aber: Wehret den Anfängen ;) (siehe hier warum: https://stackoverflow.com/a/2416334)
+				//	  Du kannst ja nur bei der InputMismatchException sinnvollerweise nochmal nach einer Eingabe fragen, die anderen beiden Exceptions deuten ja auf ein funktionelles Problem
+				//    mit dem Scanner hin, der dann also offensichtlich keine weiteren Eingaben mehr annehmen kann.
+				//
+				// Um es nun aber alles nicht zu kompliziert zu machen, kannst du das Ganze auch erstmal, wie oben beschrieben umsetzen.
+				// Optional natürlich mit der Prüfung auf zu kleine oder große Spaltenzahlen.
+				// Merk dir aber am Besten, was ich hier schon mal zu Exception-Handling erwähnt hab, damit es später richtig wird.
 				try {
 					int spalte = scanner.nextInt() - 1;
 					aktuellerSpieler.setzeStein(spalte);
