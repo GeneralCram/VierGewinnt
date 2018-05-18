@@ -51,39 +51,131 @@ public class Spielfeld {
 		}
 	}
 
-	public boolean pruefeObVierInZeile(Farbe[][] arraySpielFeld) {
+	public boolean sindVierInEinerReihe() {
+		// Zeilen
 		for (int zeile = 0; zeile < 6; zeile++) {
 			int summe = 1;
-			for (int spalte = 0; spalte < 6; spalte++) { // nur bis zur 6.Spalte pruefen, da die nachfolgende Spalte
-															// immer mitkontrolliert wird
-				if (arraySpielFeld[zeile][spalte + 1] != null && arraySpielFeld[zeile][spalte] != null
+
+			for (int spalte = 0; spalte < 6; spalte++) {
+				if (arraySpielFeld[zeile][spalte] != null && arraySpielFeld[zeile][spalte + 1] != null
 						&& arraySpielFeld[zeile][spalte] == arraySpielFeld[zeile][spalte + 1]) {
 					summe++;
 
-					// Wie soll diese Bedingung (summe >= 4) an dieser Stelle jemals wahr werden?
-					// summe wird oben auf 1 gesetzt und bei dem Wert bleibt es dann auch.
-					// Ich würde an dieser Stelle unkonditional (also ohne if-Block) summe = summe +
-					// 1 oder auch einfach summe++ (ist die kurze Notation dafür) setzen.
-					// So wird jedes Mal der Wert erhöht, wenn ein gleicher Stein als Nachbar
-					// gefunden wird.
-					// Sollte kein gleicher Nachbar gefunden werden, dann summe = 1.
-					// Nachdem die innere Schleife für die Spalten durchgelaufen ist, kannst du dann
-					// die Bedingung (summe >= 4) verwenden um true zurückzugeben. Also:
+					if (summe >= 4) {
+						return true;
+					}
 
-				} else { // Diesen Block als else-Zweig für den (arraySpielfeld[zeile][spalte] != null &&
-							// ...)-Block (also den äußeren if-Block) verwenden
+				} else {
 					summe = 1;
+
 				}
 			}
-			if (summe >= 4) { // Diesen if-Block hinter die innere Schleife setzen
-				return true;
+		}
+		// Spalten
+		for (int spalte = 0; spalte < 7; spalte++) {
+			int summe = 1;
+
+			for (int zeile = 0; zeile < 5; zeile++) {
+				if (arraySpielFeld[zeile][spalte] != null && arraySpielFeld[zeile + 1][spalte] != null
+						&& arraySpielFeld[zeile][spalte] == arraySpielFeld[zeile + 1][spalte]) {
+					summe++;
+
+					if (summe >= 4) {
+						return true;
+					}
+
+				} else {
+					summe = 1;
+
+				}
 			}
 		}
-		return false;
 
-	}
+		// Diagonale Reihen Mitte bis unten links
+		for (int zeile = 0; zeile < 5; zeile++) {
+			int summe = 1;
+			int tempZeilenCounter = zeile;
 
-	public boolean VierEineReihe() {
+			for (int spalte = 0; spalte < (5 - zeile); spalte++) {
+				if (arraySpielFeld[tempZeilenCounter][spalte] != null
+						&& arraySpielFeld[tempZeilenCounter + 1][spalte + 1] != null
+						&& arraySpielFeld[tempZeilenCounter][spalte] == arraySpielFeld[tempZeilenCounter + 1][spalte
+								+ 1]) {
+					summe++;
+
+					if (summe >= 4) {
+						return true;
+					}
+				} else {
+					summe = 1;
+				}
+
+				tempZeilenCounter++;
+			}
+		}
+
+		// Diagonale Reihen Mitte bis oben rechts
+		for (int spalte = 1; spalte < 7; spalte++) {
+			int summe = 1;
+			int tempSpaltenCounter = spalte;
+
+			for (int zeile = 0; zeile < (6 - spalte); zeile++) {
+				if (arraySpielFeld[zeile][tempSpaltenCounter] != null
+						&& arraySpielFeld[zeile + 1][tempSpaltenCounter + 1] != null
+						&& arraySpielFeld[zeile][tempSpaltenCounter] == arraySpielFeld[zeile + 1][tempSpaltenCounter
+								+ 1]) {
+					summe++;
+
+					if (summe >= 4) {
+						return true;
+					}
+				} else {
+					summe = 1;
+				}
+
+				tempSpaltenCounter++;
+			}
+		}
+
+		// for (int spalte = 0; spalte < 2; spalte++) {
+		// int summe = 1;
+		//
+		// for (int zeile = 0; zeile < 5; zeile++) {
+		// if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile +
+		// 1] != null
+		// && arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile + 1]) {
+		// summe++;
+		//
+		// if (summe >= 4) {
+		// return true;
+		// }
+		//
+		// } else {
+		// summe = 1;
+		//
+		// }
+		// }
+		// }
+		//
+		// for (int spalte = 2; spalte < 4; spalte++) {
+		// int summe = 1;
+		//
+		// for (int zeile = 0; testbedingung < 5; zeile++) {
+		// if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile +
+		// 1] != null
+		// && arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile + 1]) {
+		// summe++;
+		//
+		// if (summe >= 4) {
+		// return true;
+		// }
+		//
+		// } else {
+		// summe = 1;
+		//
+		// }
+		// }
+		// }
 
 		return false;
 	}
