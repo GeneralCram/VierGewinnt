@@ -12,6 +12,7 @@ public class Spielfeld {
 	// Spielfeld [Zeile] [Spalte]
 	private final Farbe arraySpielFeld[][] = new Farbe[6][7];
 	private static Spielfeld instanceSpielfeld;
+	private int MaxZeile = 4;
 
 	private Spielfeld() {
 	}
@@ -90,92 +91,137 @@ public class Spielfeld {
 				}
 			}
 		}
-
-		// Diagonale Reihen Mitte bis unten links
-		for (int zeile = 0; zeile < 5; zeile++) {
-			int summe = 1;
-			int tempZeilenCounter = zeile;
-
-			for (int spalte = 0; spalte < (5 - zeile); spalte++) {
-				if (arraySpielFeld[tempZeilenCounter][spalte] != null
-						&& arraySpielFeld[tempZeilenCounter + 1][spalte + 1] != null
-						&& arraySpielFeld[tempZeilenCounter][spalte] == arraySpielFeld[tempZeilenCounter + 1][spalte
-								+ 1]) {
-					summe++;
-
-					if (summe >= 4) {
-						return true;
-					}
-				} else {
-					summe = 1;
-				}
-
-				tempZeilenCounter++;
-			}
-		}
-
-		// Diagonale Reihen Mitte bis oben rechts
-		for (int spalte = 1; spalte < 7; spalte++) {
-			int summe = 1;
-			int tempSpaltenCounter = spalte;
-
-			for (int zeile = 0; zeile < (6 - spalte); zeile++) {
-				if (arraySpielFeld[zeile][tempSpaltenCounter] != null
-						&& arraySpielFeld[zeile + 1][tempSpaltenCounter + 1] != null
-						&& arraySpielFeld[zeile][tempSpaltenCounter] == arraySpielFeld[zeile + 1][tempSpaltenCounter
-								+ 1]) {
-					summe++;
-
-					if (summe >= 4) {
-						return true;
-					}
-				} else {
-					summe = 1;
-				}
-
-				tempSpaltenCounter++;
-			}
-		}
-
-		// for (int spalte = 0; spalte < 2; spalte++) {
-		// int summe = 1;
 		//
+		// // Diagonale Reihen Mitte bis unten links
 		// for (int zeile = 0; zeile < 5; zeile++) {
-		// if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile +
-		// 1] != null
-		// && arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile + 1]) {
-		// summe++;
-		//
-		// if (summe >= 4) {
-		// return true;
-		// }
-		//
-		// } else {
-		// summe = 1;
-		//
-		// }
-		// }
-		// }
-		//
-		// for (int spalte = 2; spalte < 4; spalte++) {
 		// int summe = 1;
+		// int tempZeilenCounter = zeile;
 		//
-		// for (int zeile = 0; testbedingung < 5; zeile++) {
-		// if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile +
-		// 1] != null
-		// && arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile + 1]) {
+		// for (int spalte = 0; spalte < (5 - zeile); spalte++) {
+		// if (arraySpielFeld[tempZeilenCounter][spalte] != null
+		// && arraySpielFeld[tempZeilenCounter + 1][spalte + 1] != null
+		// && arraySpielFeld[tempZeilenCounter][spalte] ==
+		// arraySpielFeld[tempZeilenCounter + 1][spalte
+		// + 1]) {
 		// summe++;
 		//
 		// if (summe >= 4) {
 		// return true;
 		// }
-		//
 		// } else {
 		// summe = 1;
+		// }
 		//
+		// tempZeilenCounter++;
 		// }
 		// }
+		//
+		// // Diagonale Reihen Mitte bis oben rechts
+		// for (int spalte = 1; spalte < 7; spalte++) {
+		// int summe = 1;
+		// int tempSpaltenCounter = spalte;
+		//
+		// for (int zeile = 0; zeile < (6 - spalte); zeile++) {
+		// if (arraySpielFeld[zeile][tempSpaltenCounter] != null
+		// && arraySpielFeld[zeile + 1][tempSpaltenCounter + 1] != null
+		// && arraySpielFeld[zeile][tempSpaltenCounter] == arraySpielFeld[zeile +
+		// 1][tempSpaltenCounter
+		// + 1]) {
+		// summe++;
+		//
+		// if (summe >= 4) {
+		// return true;
 		// }
+		// } else {
+		// summe = 1;
+		// }
+		//
+		// tempSpaltenCounter++;
+		// }
+		// }
+		//
+
+		// Links oben nach rechts unten (Startposition 1, 2)
+		for (int spalte = 0; spalte < 2; spalte++) {
+			int summe = 1;
+
+			for (int zeile = 0; zeile < 5; zeile++) {
+				if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile + 1] != null
+						&& arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile + 1]) {
+					summe++;
+
+					if (summe >= 4) {
+						return true;
+					}
+
+				} else {
+					summe = 1;
+
+				}
+			}
+		}
+
+		// Links oben nach rechts unten (Startposition 3, 4)
+		for (int spalte = 2; spalte < 4; spalte++) {
+			int summe = 1;
+
+			for (int zeile = 0; zeile < MaxZeile; zeile++) {
+				if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile + 1] != null
+						&& arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile + 1]) {
+					summe++;
+					MaxZeile--;
+
+					if (summe >= 4) {
+						return true;
+					}
+
+				} else {
+					summe = 1;
+
+				}
+			}
+		}
+
+		// Rechts oben nach links unten (Startposition 1, 2)
+		for (int spalte = 0; spalte < 2; spalte++) {
+			int summe = 1;
+
+			for (int zeile = 0; zeile < 5; zeile++) {
+				if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile - 1] != null
+						&& arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile - 1]) {
+					summe++;
+
+					if (summe >= 4) {
+						return true;
+					}
+
+				} else {
+					summe = 1;
+
+				}
+			}
+		}
+
+		// Rechts oben nach links unten (Startposition 3, 4)
+		for (int spalte = 2; spalte < 4; spalte++) {
+			int summe = 1;
+
+			for (int zeile = 0; zeile < MaxZeile; zeile++) {
+				if (arraySpielFeld[zeile][zeile] != null && arraySpielFeld[zeile + 1][zeile - 1] != null
+						&& arraySpielFeld[zeile][zeile] == arraySpielFeld[zeile + 1][zeile - 1]) {
+					summe++;
+					MaxZeile--;
+
+					if (summe >= 4) {
+						return true;
+					}
+
+				} else {
+					summe = 1;
+
+				}
+			}
+		}
 
 		return false;
 	}
