@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_kvPPcF32EeiiE_97zqj4pw" name="Swing">
+  <packagedElement xmi:type="uml:Class" xmi:id="_roMrUF32EeiiE_97zqj4pw" name="JPanel"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_qmW-YF33EeiiE_97zqj4pw" name="JTextField"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_tN4aQF33EeiiE_97zqj4pw" name="JButton"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_2HPAkF33EeiiE_97zqj4pw" name="JLabel"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_np-lcF36EeiiE_97zqj4pw" name="JFrame"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_m13ZMF4AEeiiE_97zqj4pw" name="ActionListener"/>
+  <packagedElement xmi:type="uml:Interface" xmi:id="_EH03YF4BEeiiE_97zqj4pw" name="MouseListener"/>
+</uml:Model>
