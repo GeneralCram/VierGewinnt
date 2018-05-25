@@ -48,7 +48,7 @@ public class SpielEngine {
 			}
 
 			if (status == EngineStatus.ENDE) {
-				System.out.println("Gewonnen!");
+				System.out.println("Supergeil, Sie haben Gewonnen!");
 
 			}
 

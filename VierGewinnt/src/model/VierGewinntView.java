@@ -11,14 +11,14 @@ import javax.swing.JTextField;
 
 public class VierGewinntView extends JFrame implements ActionListener {
 
-	private JLabel labelStatusleiste;
-	private JPanel panelNamensEingabe;
-	private SpielfeldPanel panelSpielfeld;
-	private JTextField eingabeFeldSpielername1;
-	private JTextField eingabeFeldSpielername2;
-	private JButton buttonNamensEingabeOK;
-	private JButton buttonNeustart;
-	private JButton buttonEnde;
+	private JLabel labelStatusleiste = new JLabel();
+	private JPanel panelNamensEingabe = new JPanel();
+	private SpielfeldPanel panelSpielfeld = new Spielfeldpanel;
+	private JTextField eingabeFeldSpielername1 = new JTextField(14);
+	private JTextField eingabeFeldSpielername2 new JTextField(14);
+	private JButton buttonNamensEingabeOK = new JButton("Name akzeptieren");
+	private JButton buttonNeustart = new JButton("Zurücksetzen");
+	private JButton buttonEnde = new JButton("Beenden");
 
 	public VierGewinntView(int inBreite, int inHoehe) {
 
@@ -26,6 +26,12 @@ public class VierGewinntView extends JFrame implements ActionListener {
 		setSize(inBreite, inHoehe);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		add(panelNamensEingabe);
+		add(eingabeFeldSpielername1);
+		add(eingabeFeldSpielername2);
+		add(buttonNamensEingabeOK);
+		add(buttonNeustart);
+		add(buttonEnde);
 
 	}
 
